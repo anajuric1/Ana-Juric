@@ -1,0 +1,159 @@
+/* =========================================================
+   TIMELINE BAR  —  Dark professional pill nav
+   ---------------------------------------------------------
+   Uses global --accent if defined in style.css; falls back.
+========================================================= */
+
+:root{
+    /* Fallbacks if not set in style.css */
+    --accent:             var(--accent, #0d6efd);
+    --accent-hover:       var(--accent-hover, #3e87ff);
+    --tl-bg:              rgba(25, 27, 30, .82);
+    --tl-border:          rgba(255,255,255,.06);
+    --tl-pill-bg:         #232629;
+    --tl-pill-text:       #e7e7e7;
+    --tl-pill-border:     rgba(255,255,255,.12);
+    --tl-pill-active-bg:  var(--accent);
+    --tl-pill-active-text:#fff;
+    --tl-gap:             14px;
+    --tl-height:          64px;
+    --tl-radius:          8px;
+    --tl-shadow:          0 2px 12px rgba(0,0,0,.35);
+  }
+  
+  /* -----------------------------
+     Container
+  ----------------------------- */
+  .timeline-bar{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 9999;
+  
+    display: flex;
+    align-items: center;
+    gap: var(--tl-gap);
+    padding: 12px 24px;
+  
+    background: var(--tl-bg);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    border-bottom: 1px solid var(--tl-border);
+    box-shadow: var(--tl-shadow);
+  
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-behavior: smooth;
+  
+    /* hide scrollbar by default */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .timeline-bar::-webkit-scrollbar{ height: 0; }
+  
+  /* show scrollbar only when user is scrolling (timeline-scroll.js toggles class) */
+  .timeline-bar.is-scrolling{
+    scrollbar-width: thin;
+  }
+  .timeline-bar.is-scrolling::-webkit-scrollbar{
+    height: 6px;
+  }
+  .timeline-bar::-webkit-scrollbar-thumb{
+    background: rgba(255,255,255,.22);
+    border-radius: 3px;
+  }
+  
+  /* edge fades to hint horizontal scroll */
+  .timeline-bar::before,
+  .timeline-bar::after{
+    content:"";
+    position: sticky;
+    top:0;
+    width: 32px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .timeline-bar::before{
+    left: 0;
+    background: linear-gradient(to right, var(--tl-bg) 0%, rgba(0,0,0,0) 100%);
+  }
+  .timeline-bar::after{
+    right: 0;
+    background: linear-gradient(to left, var(--tl-bg) 0%, rgba(0,0,0,0) 100%);
+  }
+  
+  /* Optional spacer to push content below fixed bar */
+  .timeline-spacer{
+    height: var(--tl-height);
+  }
+  
+  /* -----------------------------
+     Pills (links)
+  ----------------------------- */
+  .timeline-event{
+    position: relative;
+    flex-shrink: 0;
+    padding: 10px 18px;
+    background: var(--tl-pill-bg);
+    color: var(--tl-pill-text);
+    border: 1px solid var(--tl-pill-border);
+    border-radius: var(--tl-radius);
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background .18s, color .18s, border-color .18s, box-shadow .18s;
+  }
+  .timeline-event:hover{
+    background: rgba(255,255,255,.07);
+    box-shadow: 0 0 0 2px rgba(255,255,255,.06) inset;
+  }
+  .timeline-event:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  
+  /* Active pill */
+  .timeline-event.active{
+    background: var(--tl-pill-active-bg);
+    color: var(--tl-pill-active-text);
+    border-color: var(--tl-pill-active-bg);
+    box-shadow: 0 0 0 2px rgba(255,255,255,.1) inset;
+  }
+  .timeline-event.active::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:-7px;
+    transform:translateX(-50%);
+    width:14px;
+    height:14px;
+    background: var(--tl-pill-active-bg);
+    clip-path: polygon(50% 100%, 0 0, 100% 0);
+  }
+  
+  /* -----------------------------
+     Small screens
+  ----------------------------- */
+  @media (max-width:768px){
+    :root{
+      --tl-height: 68px;
+      --tl-gap: 9px;
+    }
+    .timeline-event{
+      padding: 8px 13px;
+      font-size: .9rem;
+      border-radius: 6px;
+    }
+  }
+  
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .timeline-bar{
+      scroll-behavior: auto;
+    }
+    .timeline-event,
+    .timeline-event.active{
+      transition: none;
+    }
+  }
+  

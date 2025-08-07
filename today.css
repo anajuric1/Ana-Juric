@@ -1,0 +1,190 @@
+/* ===========================
+   TODAY PAGE — Dark Pro Theme
+   =========================== */
+   :root{
+    /* Colors */
+    --bg:            #0f1114;
+    --panel:         #1b1e23;
+    --panel-alt:     #22262c;
+    --text:          #f4f5f7;
+    --text-muted:    #a7acb4;
+    --border:        #32363c;
+    --border-light:  #4b5159;
+    --accent:        #1e6df2;
+    --accent-hover:  #3a81ff;
+    --table-head:    #2f463d;     /* deep green carries through brand */
+    --table-head-tx: #ffffff;
+    --success:       #3bc67b;
+    --warning:       #ffb74d;
+    --danger:        #ff6b6b;
+    --radius:        8px;
+    --shadow:        0 8px 28px rgba(0,0,0,.35);
+    --transition:    160ms ease;
+    --max-width:     1280px;
+    --pad-x:         32px;
+    --pad-y:         56px;
+    --font-body:     "Segoe UI", "Times New Roman", Times, serif;
+    --font-serif:    Georgia, "Times New Roman", Times, serif;
+  }
+  
+  /* RESET BASICS */
+  *,
+  *::before,
+  *::after{ box-sizing:border-box; margin:0; padding:0; }
+  
+  html,body{
+    height:100%;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  
+  /* TYPOGRAPHY */
+  h1,h2,h3{
+    font-weight:700;
+    line-height:1.25;
+    margin:0 0 .75rem;
+    color:#fff;
+  }
+  h1{
+    text-align:center;
+    font-size:2.15rem;
+    margin-bottom:2.25rem;
+    letter-spacing:.01em;
+  }
+  h2{
+    font-size:1.05rem;
+    color:var(--text-muted);
+    text-transform:uppercase;
+    letter-spacing:.08em;
+  }
+  p{
+    margin:0 0 1rem;
+    line-height:1.6;
+    color:var(--text-muted);
+    font-size:1rem;
+  }
+  
+  /* WRAPPER */
+  .tariff-container{
+    max-width:var(--max-width);
+    padding:var(--pad-y) var(--pad-x) 64px;
+    margin:0 auto;
+  }
+  
+  /* CARD/PANEL UTILS */
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:2rem;
+    margin-bottom:3rem;
+  }
+  .panel--alt{ background:var(--panel-alt); }
+  
+  /* TABLES */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    color:#000;
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    margin:0 0 48px;
+    font-size:16px;
+  }
+  thead th{
+    background:var(--table-head);
+    color:var(--table-head-tx);
+    font-weight:600;
+    letter-spacing:.02em;
+    text-align:left;
+    position:sticky;
+    top:0;
+    z-index:2;
+  }
+  th,td{
+    padding:14px 18px;
+    border:1px solid var(--border-light);
+    vertical-align:top;
+  }
+  tbody tr:nth-child(even){ background:#f7f7f7; }
+  tbody tr:hover{ background:#ececec; transition:background var(--transition); }
+  
+  /* LINKS */
+  a{
+    color:var(--accent);
+    text-decoration:underline;
+    transition:color var(--transition);
+  }
+  a:hover{ color:var(--accent-hover); }
+  
+  /* BADGES (optional utility) */
+  .badge{
+    display:inline-block;
+    padding:.15rem .5rem;
+    border-radius:4px;
+    font-size:.75rem;
+    font-weight:600;
+    letter-spacing:.03em;
+    color:#fff;
+  }
+  .badge--ok{ background:var(--success); }
+  .badge--warn{ background:var(--warning); color:#222; }
+  .badge--err{ background:var(--danger); }
+  
+  /* LAST UPDATED */
+  .last-updated{
+    text-align:center;
+    font-style:italic;
+    margin:48px 0 16px;
+    color:var(--text-muted);
+    font-size:.9rem;
+  }
+  
+  /* SEPARATOR (optional thin line) */
+  .event-separator{
+    width:72%;
+    max-width:820px;
+    height:1px;
+    background:var(--border-light);
+    margin:64px auto;
+    opacity:.55;
+  }
+  
+  /* HIDE helper */
+  .hidden{ display:none !important; }
+  
+  /* RESPONSIVE */
+  @media(max-width:1024px){
+    :root{
+      --pad-x:24px;
+      --pad-y:72px;
+    }
+    table{ font-size:15px; }
+    th,td{ padding:12px 14px; }
+  }
+  @media(max-width:768px){
+    h1{ font-size:1.7rem; margin-bottom:1.6rem; }
+    .tariff-container{ padding:calc(var(--pad-y) + 8px) 16px 48px; }
+    table{ font-size:14.5px; }
+    th,td{ padding:11px 12px; }
+  }
+  @media(max-width:480px){
+    h1{ font-size:1.45rem; }
+    th{ font-size:.85rem; }
+    td{ font-size:.85rem; }
+  }
+  
+  /* REDUCED MOTION */
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      transition:none !important;
+      animation:none !important;
+    }
+  }
+  

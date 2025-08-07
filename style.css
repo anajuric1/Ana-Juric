@@ -1,0 +1,323 @@
+/* =========================================================
+   STYLE.CSS  —  Dark professional theme (accessible & sleek)
+   ---------------------------------------------------------
+   • Keeps all existing class names
+   • Adds fluid type, nicer spacing, better focus states
+   • Subtle gradients / shadows, refined tables
+   • Responsive + print friendly
+========================================================= */
+
+/* --------------------------
+   VARIABLES & RESET
+-------------------------- */
+:root{
+  /* Color system */
+  --bg-page:        #151719;
+  --bg-page-grad:   radial-gradient(circle at 20% 0%, #1b1e22 0%, #131416 80%);
+  --bg-section:     #1e2124;
+  --bg-section-alt: #535659;
+  --text-main:      #ececec;
+  --text-muted:     #b9b9b9;
+  --text-invert:    #fff;
+  --accent:         #0d6efd;
+  --accent-hover:   #3e87ff;
+  --accent-soft:    rgba(13,110,253,.12);
+  --table-head:     #272727;
+  --table-row-alt:  #535659;
+  --table-border:   #2b2e31;
+  --separator:      #5d5d5d;
+
+  /* Layout */
+  --timeline-height: 62px;
+  --container-pad-x: clamp(1.25rem, 5vw, 5%);
+  --gap-x:           clamp(2rem, 6vw, 4rem);
+  --radius-sm:       6px;
+  --radius-md:       10px;
+  --shadow-md:       0 6px 18px rgba(0,0,0,.45);
+  --shadow-sm:       0 2px 8px rgba(0,0,0,.25);
+
+  /* Typography */
+  --font-body: 'Segoe UI', 'Times New Roman', Times, serif;
+  --fs-base:  clamp(.98rem, 1vw + .7rem, 1.05rem);
+  --fs-h1:    clamp(1.8rem, 2.6vw + 1rem, 2.4rem);
+  --fs-h2:    clamp(.9rem, .6vw + .7rem, 1rem);
+  --line-body: 1.65;
+}
+
+*,
+*::before,
+*::after{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+body{
+  min-height: 100%;
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--line-body);
+  background: var(--bg-page);
+  background-image: var(--bg-page-grad);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Better focus visibility */
+:focus-visible{
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* --------------------------
+   EVENT BLOCK
+-------------------------- */
+.event-display{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: var(--bg-section);
+  color: var(--text-main);
+  padding: calc(var(--timeline-height) + 2rem) var(--container-pad-x) 3.5rem;
+  min-height: 100vh;
+  gap: var(--gap-x);
+  position: relative;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.02);
+}
+
+/* Separation between stacked events */
+.event-display + .event-display{
+  margin-top: 4.5rem;
+}
+.event-display + .event-display::before{
+  content: "";
+  position: absolute;
+  top: -2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 78%;
+  height: 1px;
+  background: var(--separator);
+  opacity: .55;
+}
+
+/* LEFT COLUMN */
+.event-left{
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: .9rem;
+}
+
+.event-left h2{
+  font-size: var(--fs-h2);
+  color: var(--text-muted);
+  letter-spacing: .03em;
+  font-weight: 600;
+}
+
+.event-left h1{
+  font-size: var(--fs-h1);
+  line-height: 1.22;
+  margin: .1rem 0 1.1rem;
+  color: var(--text-invert);
+  text-shadow: 0 1px 2px rgba(0,0,0,.55);
+}
+
+#event-desc{
+  font-size: 1.05rem;
+  line-height: 1.72;
+  max-width: 42ch;
+  color: var(--text-main);
+}
+
+/* Image */
+.event-image{
+  width: 100%;
+  height: auto;
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  transition: transform .28s cubic-bezier(.4,.0,.2,1), box-shadow .28s;
+}
+.event-image:hover{
+  transform: scale(1.02);
+  box-shadow: 0 10px 26px rgba(0,0,0,.6);
+}
+
+/* RIGHT COLUMN */
+.event-text{
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  margin-top: 1rem;
+  align-items: center; /* keep tables centered as a group */
+}
+
+/* --------------------------
+   TABLES
+-------------------------- */
+.event-table,
+.event-table-references{
+  width: 100%;
+  max-width: 900px;
+  border-collapse: collapse;
+  background: var(--bg-section-alt);
+  color: var(--text-main);
+  border: 1px solid var(--table-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.event-table th,
+.event-table td,
+.event-table-references th,
+.event-table-references td{
+  padding: 13px 16px;
+  border: 1px solid var(--table-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.event-table th,
+.event-table-references th{
+  background: var(--table-head);
+  color: var(--text-invert);
+  width: 30%;
+  letter-spacing: .015em;
+  font-weight: 600;
+}
+
+.event-table td strong{
+  font-weight: 700;
+  color: var(--text-invert);
+}
+
+.event-table-references tbody tr:nth-child(even){
+  background: var(--table-row-alt);
+}
+
+.event-table-references a{
+  color: var(--accent);
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color .2s;
+}
+.event-table-references a:hover{
+  color: var(--accent-hover);
+}
+
+.event-table-references a {
+  color: var(--text-invert); /* White text */
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color .2s;
+}
+.event-table-references a:hover {
+  color: var(--text-main); /* Slightly muted white/grey on hover */
+}
+
+}
+
+/* --------------------------
+   TIMELINE BAR (minimal tweaks, main rules live in timeline.css)
+-------------------------- */
+.timeline-bar{
+  scroll-behavior: smooth;
+}
+.timeline-event{
+  position: relative;
+  transition: background-color .2s, color .2s, box-shadow .25s;
+}
+.timeline-event:hover{
+  box-shadow: 0 0 0 2px var(--accent-soft) inset;
+}
+.timeline-event.active{
+  box-shadow: 0 0 0 2px var(--accent) inset;
+}
+
+/* Hide scrollbar until user interacts (WebKit) */
+.timeline-bar::-webkit-scrollbar{
+  height: 0;
+}
+.timeline-bar:hover::-webkit-scrollbar{
+  height: 6px;
+}
+.timeline-bar::-webkit-scrollbar-thumb{
+  background: var(--accent-soft);
+  border-radius: 3px;
+}
+
+/* --------------------------
+   UTILITIES
+-------------------------- */
+.text-center{ text-align:center; }
+.mt-2{ margin-top: .5rem; }
+.mt-4{ margin-top: 1rem; }
+
+/* --------------------------
+   RESPONSIVE
+-------------------------- */
+@media (max-width: 1024px){
+  .event-display{
+    flex-direction: column;
+    align-items: center;
+    padding: calc(var(--timeline-height) + 2.2rem) 1.2rem 2.8rem;
+    gap: 2.6rem;
+  }
+  .event-left,
+  .event-text{
+    width: 100%;
+    max-width: 100%;
+  }
+  #event-desc{ max-width: none; }
+  .event-image{ max-height: 420px; }
+}
+
+@media (max-width: 768px){
+  .timeline-event{
+    font-size: .88rem;
+    padding: 6px 10px;
+  }
+  .event-table th,
+  .event-table-references th{
+    width: 40%;
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --------------------------
+   PRINT (basic)
+-------------------------- */
+@media print{
+  body{ background: #fff; color:#000; }
+  .timeline-bar{ display:none; }
+  .event-display{
+    padding: 1.5rem 0;
+    box-shadow:none;
+    background:#fff;
+    color:#000;
+  }
+  .event-image{
+    box-shadow:none;
+  }
+  a{ color:#000; text-decoration:underline; }
+}
